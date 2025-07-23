@@ -6,9 +6,9 @@ The goal is to define precise, reusable, and role-based behaviors through struct
 
 ## Motivation
 
-Most prompts are just plain text, hard to maintain, hard to scale, and not always reliable.
+Most prompts are plain text — difficult to maintain, scale, or reuse reliably.
 
-MinionForge solves this by breaking down instructions into atomic units called **capabilities**, and loading only what each role needs. This brings consistency, context-awareness, and full control over how AI behaves across tasks like feature design, architecture, or implementation.
+MinionForge solves this by breaking behavior into modular, reusable instructions tied to specific roles and contexts.
 
 ## Project Status
 
@@ -26,10 +26,10 @@ MinionForge uses custom XML tags embedded in `.md` files. These tags define stru
 |------------------|--------------------------------------------------------------------|
 | `<role>`         | Declares the identity and purpose of the AI agent.                |
 | `<responsibility>` | Lists what this role is expected to deliver.                    |
-| `<default-behavior-rules>` | Declares global rules shared by all roles and capabilities. Only allowed in the base instruction file. |
-| `<rules>` / `<rule>` | Mandatory behaviors and constraints for the role or capability. |
+| `<default-behavior-rules>` | Declares global rules shared by all roles and instruction. Only allowed in the base instruction file. |
+| `<rules>` / `<rule>` | Mandatory behaviors and constraints for the role or instruction. |
 | `<directives>` / `<directive>` | Recommended strategies or behavioral suggestions.      |
-| `<capabilities>` / `<capability>` | Declares capability instructions: either as inline blocks or external references. |
+| `<instruction>` / `<instructions>` | Declares instructions: either as inline blocks or external references. |
 | `<examples>` / `<example>` | Optional usage samples for clarity or guidance.          |
 | `<switches>` / `<switch>` | Runtime options or behavior flags (e.g. `--seq`).         |
 | `<context-binding>` | Sets the default language, architecture, or project context.   |
@@ -42,40 +42,40 @@ MinionForge uses custom XML tags embedded in `.md` files. These tags define stru
 
 ## Format and Structure
 
-All files are plain `.md` files using XML-style tags. Each `<capability>` is structured using a consistent set of components described below.
+All files are plain `.md` files using XML-style tags. Each `<instruction>` is structured using a consistent set of components described below.
 
-### `<capabilities>` / `<capability>`
+### `<instructions>` / `<instruction>`
 
-The `<capabilities>` tag is used to load capability instructions.
+The `<instructions>` tag is used to declare atomic instructions.
 
 You can define them in two ways:
 
 1. **External reference** (recommended for modular design):
 
 ```xml
-<capabilities>
-  - [analyze-project](../capabilities/analyze-project.md)
-  - [generate-development-checklist](../capabilities/generate-development-checklist.md)
-</capabilities>
+<instructions>
+  - [analyze-project](../instructions/analyze-project.md)
+  - [generate-development-checklist](../instructions/generate-development-checklist.md)
+</instructions>
 ```
 
-Each item links to a separate .md file containing a <capability> block, like:
+each item links to a separate `.md` file containing a <instruction> block, like:
 
 ```xml
-<!-- File: capabilities/generate-development-checklist.md -->
-<capability id="generate-development-checklist">
+<!-- File: instructions/generate-development-checklist.md -->
+<instruction id="generate-development-checklist">
   Generate a detailed checklist from the FDD, with verifiable implementation steps grouped by section.
-</capability>
+</instruction>
 ```
 
 2. **Inline declaration** (for context-specific or temporary instructions):
 
 ```xml
-<capabilities>
-  <capability id="generate-development-checklist">
+<instructions>
+  <instruction id="generate-development-checklist">
     Generate a detailed checklist from the FDD, with verifiable implementation steps grouped by section.
-  </capability>
-</capabilities>
+  </instruction>
+</instructions>
 ```
 
 You may mix both forms if needed, but external files are preferred for reuse and clarity.
@@ -125,7 +125,7 @@ Use only when the behavior is non-obvious or benefits from demonstration.
 ### `<switches>`
 
 Declare runtime flags that affect reasoning. For example: `--seq` for sequential thinking.  
-Each `<switch>` represents a modifier that the model should activate when the capability is loaded.
+Each `<switch>` represents a modifier that the model should activate when the instruction is loaded.
 
 ```xml
 <switches>
@@ -136,10 +136,10 @@ Each `<switch>` represents a modifier that the model should activate when the ca
 
 ### `<variants>`
 
-Used to specialize a capability for specific environments (like Django, Laravel, etc.).
+Used to specialize a instruction for specific environments (like Django, Laravel, etc.).
 
 Each `<variant>` must include a `<context-match>` section that defines when it applies.  
-Variants may override or add `<rules>`, `<directives>`, or `<examples>` inside the capability.
+Variants may override or add `<rules>`, `<directives>`, or `<examples>` inside the instruction.
 
 ```xml
 <variant>
@@ -153,7 +153,7 @@ Variants may override or add `<rules>`, `<directives>`, or `<examples>` inside t
 </variant>
 ```
 
-Variants are optional. The base capability applies globally by default.
+Variants are optional. The base instruction applies globally by default.
 
 ### `<context-binding>`
 
@@ -175,7 +175,7 @@ Use this block in role or system instruction files to define expectations like:
 ```text
 .github/
   ├── copilot-instructions.md
-  ├── capabilities/
+  ├── instructions/
   │   ├── analyze-project.md
   │   ├── generate-fdd-outline.md
   │   ├── generate-development-checklist.md
@@ -187,5 +187,5 @@ Use this block in role or system instruction files to define expectations like:
 
 ```
 
-- `capabilities/` contains atomic instruction modules (reusable).
-- `chatmodes/` defines the roles, responsibilities, and capability loading logic.
+- `instructions/` contains atomic instruction modules (reusable).
+- `chatmodes/` defines the roles, responsibilities, and instruction loading logic.
