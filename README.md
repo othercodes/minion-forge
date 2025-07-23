@@ -26,6 +26,7 @@ MinionForge uses custom XML tags embedded in `.md` files. These tags define stru
 |------------------|--------------------------------------------------------------------|
 | `<role>`         | Declares the identity and purpose of the AI agent.                |
 | `<responsibility>` | Lists what this role is expected to deliver.                    |
+| `<default-behavior-rules>` | Declares global rules shared by all roles and capabilities. Only allowed in the base instruction file. |
 | `<rules>` / `<rule>` | Mandatory behaviors and constraints for the role or capability. |
 | `<directives>` / `<directive>` | Recommended strategies or behavioral suggestions.      |
 | `<capabilities>` / `<capability>` | Declares capability instructions: either as inline blocks or external references. |
@@ -162,20 +163,6 @@ Use this block in role or system instruction files to define expectations like:
   <principles>design-first</principles>
 </context-binding>
 ```
-
-### `<capabilities>`
-
-Specifies which `.md` files to load as active capabilities for this role or mode.  
-Use relative paths in `[label](path)` format inside the tag.
-
-```xml
-<capabilities>
-  - [analyze-project](../capabilities/analyze-project.md)
-  - [generate-fdd-outline](../capabilities/generate-fdd-outline.md)
-</capabilities>
-```
-
-This tells the model to read and apply those files as part of its operational instructions.
 
 ### Example Project Structure
 
