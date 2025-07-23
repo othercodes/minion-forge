@@ -33,6 +33,12 @@ MinionForge uses custom XML tags embedded in `.md` files. These tags define stru
 | `<examples>` / `<example>` | Optional usage samples for clarity or guidance.          |
 | `<switches>` / `<switch>` | Runtime options or behavior flags (e.g. `--seq`).         |
 | `<context-binding>` | Sets the default language, architecture, or project context.   |
+| `<communication-rules>` | Defines how the AI should interact with users (tone, clarity, intent). |
+| `<tone-rules>`          | Enforces voice, confidence, and level of formality.                  |
+| `<visual-style-rules>`  | Controls formatting, spacing, line length, and visual hierarchy.     |
+| `<symbol-rules>`        | Specifies allowed symbols and their meanings.                        |
+| `<symbol>`              | Declares individual symbols and their interpretation.                |
+| `<message-structure>`   | Defines the required structure of output (summary first, bullets, etc). |
 
 ## Format and Structure
 
