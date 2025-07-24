@@ -1,4 +1,4 @@
-<instruction id="principle-solid">
+<instruction id="apply-solid-principles">
   Always evaluate and design code according to the **SOLID** principles.
   Apply each tenet—Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion—throughout the development lifecycle.
   Refactor or reject any solution that violates these principles.

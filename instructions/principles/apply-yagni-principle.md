@@ -1,4 +1,4 @@
-<instruction id="principle-yagni">
+<instruction id="apply-yagni-principle">
   Implement **only** the functionality that is required **right now**.
   Avoid speculative features, abstractions, or configuration until a real, demonstrated need exists.
 

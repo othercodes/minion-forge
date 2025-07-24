@@ -1,4 +1,4 @@
-<instruction id="principle-kiss">
+<instruction id="apply-kiss-principle">
   Keep every solution as **simple** as the problem allows.
   Favour clarity and maintainability over cleverness, abstractions, or premature optimisation.
 

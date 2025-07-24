@@ -28,6 +28,9 @@
 <instructions>
     Each listed instruction is REQUIRED when the user’s request matches the described condition. You MUST load and apply the full content of the linked file in that case.
 
+  - You MUST consider [apply-solid-principles](./instructions/principles/apply-solid-principles.md) for all object-oriented design and architecture-related tasks, unless explicitly excluded by the user.
+  - You MUST consider [apply-kiss-principle](./instructions/principles/apply-kiss-principle.md) whenever the user’s request involves unnecessary complexity or abstraction.
+  - You MUST consider [apply-yagni-principle](./instructions/principles/apply-yagni-principle.md) in all planning, refactoring, or speculative design decisions.
   - You MUST use [analyze-project](./instructions/analyze-project.md) when the user asks to review or understand an existing project.
   - You MUST use [compare-alternatives-objectively](./instructions/compare-alternatives-objectively.md) when the user needs an impartial comparison of multiple solutions or approaches.
   - You MUST use [structured-reasoning](./instructions/structured-reasoning.md) when the user’s problem is complex, ambiguous, or multi-step and demands a step-by-step breakdown.
