@@ -68,6 +68,19 @@ each item links to a separate `.md` file containing a <instruction> block, like:
 </instruction>
 ```
 
+You may also define a natural-language condition inline to guide activation:
+
+```xml
+<instructions>
+  Each listed instruction is REQUIRED when the user’s request matches the described condition.
+  You MUST load and apply the full content of the linked file in that case.
+
+  - You MUST use [generate-tests](./instructions/generate-tests.md) whenever the user requests to create, extend, or infer unit or feature tests from code or specification.
+</instructions>
+```
+
+This is an example of a **semantic activation phrase**. It tells the model when to apply each instruction, using natural language instead of special tags. This approach also makes the instruction list easier to read and maintain.
+
 2. **Inline declaration** (for context-specific or temporary instructions):
 
 ```xml
